@@ -1,4 +1,6 @@
 import time
+
+# 1st Title
 print('''
  ██████  ██    ██ ██ ███████ 
 ██    ██ ██    ██ ██    ███  
@@ -8,18 +10,28 @@ print('''
     ▀▀
 Welcome to the Minecraft quiz! (1.17)
 ''')
-time.sleep(2)
+
+# A countdown to start the quiz
+time.sleep(1)
+print("Ready")
+time.sleep(1)
+print("Set")
+time.sleep(1)
+print("Go!")
+time.sleep(0.5)
+
+# 2nd Title
 print("\nThis Quiz will have 20 questions the difficulty will be random the score will be out of 100%, you will also recevie a grade!")
 
-# lists
+# Making lists
 questions_wrong = []
 questions_right = []
 
-# var
+# Making Varibles for later
 score = 0
-txt = "Please choose from A, B, C or D"
+txt = "Please choose from A, B, C or D" # A shortcut varible
 
-# def
+# def for checking answering and getting a valid input
 def get_response(error_message):
     while True:
         inpt = input().upper()
@@ -34,6 +46,7 @@ def get_response(error_message):
         else:
             print(error_message)
 
+# def for asking the user a question checking the input and adding score and adding wrong and right answers to the lists above
 def ask_question(question, error_message, correct):
     global score
     global questions_right
@@ -45,8 +58,9 @@ def ask_question(question, error_message, correct):
         questions_right.append(question)
     else:
         questions_wrong.append(question)
+
     
-# quiz
+# the full quiz of questions
 
 all_questions = [
     ["What year was Minecraft Java Edition released?\nA 2014\nB 2012\nC 2011\nD 2009", txt, 'C'],
@@ -73,10 +87,10 @@ all_questions = [
 for question, error_message, correct in all_questions:
     ask_question(question, error_message, correct)
 
-# scoring after quiz
+# turing the percent of score into a grade
 
 percent = (score/20)*100
-# a = 100 ~ 90 b = 89 ~ 80 c = 79 ~ 70 d = 69 ~ 60 e = 59 ~ 50 f = 49 ~ 0
+# a = 100 ~ 90 b = 89 ~ 80 c = 79 ~ 70 d = 69 ~ 60 e = 59 ~ 50 f = 49 ~ 0 - Gradeing
 if percent >= 90:
    grade = "A"
 elif 80 <= percent <= 89:
@@ -89,8 +103,8 @@ elif 50 <= percent <= 59:
     grade = "E"
 else:
     grade = "F"
-print("You got these questions wrong!")
-print(questions_wrong)
+
+# showing user results
 print(f"You got {percent}%!\nYour Grade is :{grade}")
 if percent == 100:
     print("100% WELL DONE!")
@@ -98,3 +112,18 @@ elif percent >= 50:
     print("Well done you passed!")
 else:
     print("You failed, please play some Minecraft!")
+
+# asking if they want to know if they got certain questions wrong or right
+askgrade = input("Would you like to know what you got wrong?\n").lower
+if askgrade in "yes":
+    if percent == 100:
+        print("Well done you didnt get a single question wrong!")
+    else:
+        print(f"You got these questions wrong:{questions_wrong}")
+
+askgrade_again = input("Would you like to know what you got right?\n").lower
+if askgrade_again in "yes":
+    if percent == 0:
+        print("Wow you got every question wrong impressive!")
+    else:
+        print(f"You got these questions right:{questions_right}")
