@@ -1,4 +1,6 @@
 import time
+import os
+import random
 
 # 1st Title
 print('''
@@ -30,7 +32,9 @@ questions_right = []
 # Making Varibles for later
 score = 0
 txt = "Please choose from A, B, C or D" # A shortcut varible
-
+loading = 0
+loading_time = random.randint(2, 4)
+loadingbar = "."
 # def for checking answering and getting a valid input
 def get_response(error_message):
     while True:
@@ -86,7 +90,26 @@ all_questions = [
 ]
 for question, error_message, correct in all_questions:
     ask_question(question, error_message, correct)
+# loading text
 
+print("Please wait calculating results")
+time.sleep(1.5)
+while loading != loading_time:
+    os.system("clear")
+    print("Loading")
+    time.sleep(0.5)
+    os.system("clear")
+    print("Loading"+loadingbar*1)
+    time.sleep(0.5)
+    os.system("clear")
+    print("Loading"+loadingbar*2)
+    time.sleep(0.5)
+    os.system("clear")
+    print("Loading"+loadingbar*3)
+    time.sleep(0.5)
+    loading += 1
+
+os.system("clear")
 # turing the percent of score into a grade
 
 percent = (score/20)*100
@@ -114,16 +137,23 @@ else:
     print("You failed, please play some Minecraft!")
 
 # asking if they want to know if they got certain questions wrong or right
-askgrade = input("Would you like to know what you got wrong?\n").lower
-if askgrade in "yes":
+askgrade = input("Would you like to know what you got wrong?\n").lower()
+if askgrade == "yes":
     if percent == 100:
         print("Well done you didnt get a single question wrong!")
-    else:
+    elif percent != 100:
         print(f"You got these questions wrong:{questions_wrong}")
+else:
+    print("Okay")
 
-askgrade_again = input("Would you like to know what you got right?\n").lower
-if askgrade_again in "yes":
+askgrade_again = input("Would you like to know what you got right?\n").lower()
+if askgrade_again == "yes":
+
     if percent == 0:
         print("Wow you got every question wrong impressive!")
-    else:
-        print(f"You got these questions right:{questions_right}")
+    elif percent != 0:
+        print(f"You got these questions right;")
+        for question in questions_right:
+            print(question + "\n")
+else:
+    print("Okay")
