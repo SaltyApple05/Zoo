@@ -33,7 +33,7 @@ questions_right = []
 score = 0
 txt = "Please choose from A, B, C or D" # A shortcut varible
 loading = 0
-loading_time = random.randint(2, 4)
+loading_time = random.randint(2, 3)
 loadingbar = "."
 # def for checking answering and getting a valid input
 def get_response(error_message):
@@ -139,16 +139,19 @@ else:
 # asking if they want to know if they got certain questions wrong or right
 askgrade = input("Would you like to know what you got wrong?\n").lower()
 if askgrade == "yes":
+    os.system("clear")
     if percent == 100:
         print("Well done you didnt get a single question wrong!")
     elif percent != 100:
-        print(f"You got these questions wrong:{questions_wrong}")
+        print("You got these questions wrong;")
+        for question in questions_wrong:
+            print(question + "\n")
 else:
     print("Okay")
 
 askgrade_again = input("Would you like to know what you got right?\n").lower()
 if askgrade_again == "yes":
-
+    os.system("clear")
     if percent == 0:
         print("Wow you got every question wrong impressive!")
     elif percent != 0:
