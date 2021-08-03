@@ -39,6 +39,7 @@ loadingbar = "."
 
 # def for checking answering and getting a valid input
 def get_response(error_message):
+    global user_answer
     while True:
         inpt = input().upper()
         if inpt == "A":
