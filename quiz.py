@@ -28,6 +28,7 @@ print("\nThis Quiz will have 20 questions the difficulty will be random the scor
 # Making lists
 questions_wrong = []
 questions_right = []
+user_answer = []
 
 # Making Varibles for later
 score = 0
@@ -35,17 +36,22 @@ txt = "Please choose from A, B, C or D" # A shortcut varible
 loading = 0
 loading_time = random.randint(2, 3)
 loadingbar = "."
+
 # def for checking answering and getting a valid input
 def get_response(error_message):
     while True:
         inpt = input().upper()
         if inpt == "A":
+            user_answer.append(inpt)
             return inpt
         elif inpt == "B":
+            user_answer.append(inpt)
             return inpt
         elif inpt == "C":
+            user_answer.append(inpt)
             return inpt
         elif inpt == "D":
+            user_answer.append(inpt)
             return inpt
         else:
             print(error_message)
@@ -144,8 +150,8 @@ if askgrade == "yes":
         print("Well done you didnt get a single question wrong!")
     elif percent != 100:
         print("You got these questions wrong;")
-        for question in questions_wrong:
-            print(question + "\n")
+        for i in range(questions_wrong):
+            print(question + "\nYour answer was" + user_answer + "\nThe real answer is" + inpt + "\n")
 else:
     print("Okay")
 
