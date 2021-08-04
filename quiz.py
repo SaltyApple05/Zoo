@@ -2,6 +2,8 @@ import time
 import os
 import random
 
+# Don't store the whole question in questions_wrong, just store the index.
+
 # 1st Title
 print('''
  ██████  ██    ██ ██ ███████ 
@@ -150,9 +152,8 @@ if askgrade == "yes":
     if percent == 100:
         print("Well done you didnt get a single question wrong!")
     elif percent != 100:
-        print("You got these questions wrong;")
-        for i in range(questions_wrong):
-            print(question + "\nYour answer was" + user_answer + "\nThe real answer is" + inpt + "\n")
+        for i in questions_wrong:
+            print(question + "\nYour answer was" + user_answer[i] + "\nThe real answer is" + all_questions[i][3] + "\n")
 else:
     print("Okay")
 
