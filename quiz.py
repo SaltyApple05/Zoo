@@ -146,13 +146,12 @@ else:
 # asking if they want to know if they got certain questions wrong or right
 askgrade = input("Would you like to know what you got wrong?\n").lower()
 if askgrade == "yes":
-    os.system("clear")
-    if percent == 100:
-        print("Well done you didnt get a single question wrong!")
-    elif percent != 100:
-        print("You got these questions wrong;")
-        for i in range(questions_wrong):
-            print(question + "\nYour answer was" + user_answer + "\nThe real answer is" + inpt + "\n")
+		os.system("clear")
+		if percent == 100:
+				print("Well done you didnt get a single question wrong!")
+		elif percent != 100:
+				for i in questions_wrong:
+						print(question + "\nYour answer was" + user_answer[i] + "\nThe real answer is" + all_questions[i][3] + "\n")
 else:
     print("Okay")
 
