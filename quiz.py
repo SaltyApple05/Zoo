@@ -2,6 +2,8 @@ import time
 import os
 import random
 
+# Don't store the whole question in questions_wrong, just store the index.
+
 # 1st Title
 print('''
  ██████  ██    ██ ██ ███████ 
