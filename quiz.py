@@ -1,8 +1,7 @@
+# importing time for the countdown and loading, os for clearing the screen to make quiz easier to read importing random for loading time
 import time
 import os
 import random
-
-# Don't store the whole question in questions_wrong, just store the index.
 
 # 1st Title
 print('''
@@ -27,16 +26,15 @@ time.sleep(0.5)
 # 2nd Title
 print("\nThis Quiz will have 20 questions the difficulty will be random the score will be out of 100%, you will also recevie a grade!")
 
-# Making lists
+# Making lists for storing answers
 questions_wrong = []
-questions_right = []
 user_answer = []
 
-# Making Varibles for later
+# Making Varibles for grading loading time and loading bar
 score = 0
 txt = "Please choose from A, B, C or D" # A shortcut varible
 loading = 0
-loading_time = random.randint(2, 3)
+loading_time = random.randint(1, 2)
 loadingbar = "."
 
 # def for checking answering and getting a valid input
@@ -44,36 +42,35 @@ def get_response(error_message):
     global user_answer
     while True:
         inpt = input().upper()
-        if inpt == "A":
-            user_answer.append(inpt)
-            return inpt
-        elif inpt == "B":
-            user_answer.append(inpt)
-            return inpt
-        elif inpt == "C":
-            user_answer.append(inpt)
-            return inpt
-        elif inpt == "D":
+        if inpt in "ABCD" and len(inpt) == 1:
             user_answer.append(inpt)
             return inpt
         else:
             print(error_message)
 
 # def for asking the user a question checking the input and adding score and adding wrong and right answers to the lists above
-def ask_question(question, error_message, correct):
+def ask_question(question, error_message, correct, question_number):
     global score
-    global questions_right
     global questions_wrong
     print(question)
     response = get_response(error_message)
     if response == correct:
         score += 1
-        questions_right.append(question)
     else:
-        questions_wrong.append(question)
+        questions_wrong.append(question_number)
+
+#def for checking that the input they give for getting their grade is valid
+def get_yes_or_no():
+    while True:
+            inpt = input("Would you like to know what you got wrong?\n").upper()
+            if inpt.isalpha():
+                if inpt == "YES" or inpt == "NO":
+                    return inpt
+            else:
+                print("Please enter yes or no ")
 
     
-# the full quiz of questions
+# the full list of questions for the quiz
 
 all_questions = [
     ["What year was Minecraft Java Edition released?\nA 2014\nB 2012\nC 2011\nD 2009", txt, 'C'],
@@ -97,10 +94,13 @@ all_questions = [
     ["How many biome are in minecraft?\nA 41\nB 81\nC 73\nD 100", txt, 'B'],
     ["What is the rarest biome?\nA Badlands\nB Giant Tree Taiga\nC Modified Jungle Edge\nD Mushroom Fields", txt, 'C'],
 ]
+# the quiz
+question_number = 0
 for question, error_message, correct in all_questions:
-    ask_question(question, error_message, correct)
-# loading text
+    ask_question(question, error_message, correct, question_number)
+    question_number += 1
 
+# loading text and loading time for user to have a short break
 print("Please wait calculating results")
 time.sleep(1.5)
 while loading != loading_time:
@@ -117,10 +117,9 @@ while loading != loading_time:
     print("Loading"+loadingbar*3)
     time.sleep(0.5)
     loading += 1
-
 os.system("clear")
-# turing the percent of score into a grade
 
+# turing the percent of score into a grade
 percent = (score/20)*100
 # a = 100 ~ 90 b = 89 ~ 80 c = 79 ~ 70 d = 69 ~ 60 e = 59 ~ 50 f = 49 ~ 0 - Gradeing
 if percent >= 90:
@@ -145,26 +144,14 @@ elif percent >= 50:
 else:
     print("You failed, please play some Minecraft!")
 
-# asking if they want to know if they got certain questions wrong or right
-askgrade = input("Would you like to know what you got wrong?\n").lower()
-if askgrade == "yes":
+# asking if they want to know if they got certain questions wrong
+askgrade = get_yes_or_no()
+if askgrade == "YES":
     os.system("clear")
     if percent == 100:
         print("Well done you didnt get a single question wrong!")
     elif percent != 100:
         for i in questions_wrong:
-            print(question + "\nYour answer was" + user_answer[i] + "\nThe real answer is" + all_questions[i][3] + "\n")
-else:
-    print("Okay")
-
-askgrade_again = input("Would you like to know what you got right?\n").lower()
-if askgrade_again == "yes":
-    os.system("clear")
-    if percent == 0:
-        print("Wow you got every question wrong impressive!")
-    elif percent != 0:
-        print(f"You got these questions right;")
-        for question in questions_right:
-            print(question + "\n")
+            print(all_questions[i][0] + "\nYour answer was " + user_answer[i] + "\nThe real answer is " + all_questions[i][2] + "\n")
 else:
     print("Okay")
