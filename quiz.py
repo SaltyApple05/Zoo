@@ -37,7 +37,7 @@ loading = 0
 loading_time = random.randint(1, 2)
 loadingbar = "."
 
-# def for checking answering and getting a valid input
+# def for checking answers and getting a valid input
 def get_response(error_message):
     global user_answer
     while True:
