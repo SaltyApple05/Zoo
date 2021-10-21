@@ -7,15 +7,12 @@ sender, password = "themaniscracked@gmail.com", "MyMan123*"
 #sender = "themaniscracked@gmail.com"
 #password = "MyMan123*"
 
-recieve = "kerikerihighschoolDTC@gmail.com"
+recieve = "leonhaslar112@gmail.com"
 
 message = """\
 Subject: Python Email
 
-This is the email!
-Hi Mr WARD
-I AM SENDING THIS FROM PYTHON 
-I AM ZAC!
+TEST
 """
 
 context = ssl.create_default_context()
